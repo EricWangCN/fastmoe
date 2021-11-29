@@ -8,7 +8,7 @@ import torch.nn as nn
 from .functions import prepare_forward, ensure_comm
 from .functions import MOEScatter, MOEGather
 from .functions import AllGather, Slice
-from .gates import NaiveGate
+from .gates import GShardGate
 
 
 def mark_module_parallel_comm(module, comm):
@@ -103,7 +103,7 @@ class FMoE(nn.Module):
         slice_group=None,
         moe_group=None,
         top_k=2,
-        gate=NaiveGate,
+        gate=GShardGate,
         expert=None,
         gate_hook=None,
         mask=None,
